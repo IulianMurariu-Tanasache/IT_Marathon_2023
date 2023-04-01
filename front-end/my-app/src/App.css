@@ -148,3 +148,21 @@
   color: rgb(70, 196, 59);
 
 }
+.raportul{
+  border-color: black;
+  border-style: solid;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  
+}
+.raportul2{
+  border-color: black;
+  border-bottom: solid;
+  margin-top: -5px;
+}
+
+.corner3{
+  border-radius: 25px;
+  border: 2px solid #33411f;
+  padding: 10px;
+}

@@ -16,9 +16,9 @@ function ReportsList({ reports }) {
       <div>
         <ul>
           {reports.map((report) => (
-            <div>
+            <div className='raportul'>
             <ReportDetails report={report} />
-            <button onClick={() => {handleSubmit(report)}}>Take report</button>
+            <button className='corner3' onClick={() => {handleSubmit(report)}}> Take report</button>
            </div>
           ))}
         </ul>
