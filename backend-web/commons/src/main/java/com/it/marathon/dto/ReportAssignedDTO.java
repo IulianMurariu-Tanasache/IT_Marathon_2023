@@ -13,6 +13,7 @@ public class ReportAssignedDTO {
     private Categories category;
     private String comments;
     private Contact contacts;
-    private String geoTagging;
+    private GeoTag geoTagging;
     private String timestamp;
+    private Boolean done = false;
 }

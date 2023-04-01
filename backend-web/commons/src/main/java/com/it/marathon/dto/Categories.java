@@ -1,7 +1,6 @@
 package com.it.marathon.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Categories {
     DANGEROUS,

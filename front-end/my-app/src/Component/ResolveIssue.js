@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
 function ResolveIssue() {
   const [responseData, setResponseData] = useState(null);
   const [dataInput, setDataInput] = useState("");
-  let Navigates = useNavigate()
 
+  let Navigates = useNavigate()
+  let location = useLocation();
+
+  console.log(location.state)
+
+  const createRequestObject = () => {
+    var id_operator = Cookies.get('loginResult')
+    var req_obj = {
+      "reportId": location.state.reportId,
+      "operatorId": id_operator,
+      "timestamp": "",
+      "actions": dataInput
+    }
+    console.log(req_obj)
+    //redirect
+    return req_obj
+  }
  
   const handleSubmit = (event) => {
     event.preventDefault();
     var token = Cookies.get('loginResult')
 
-    fetch("http://localhost:8002/artists",{
+    fetch("http://localhost:8003/api/operators/reports/submit",{
         method: "POST",
         headers: {
         "Content-Type": "application/json", 
         "Authorization" : token ,
         },
-        
+        body: JSON.stringify(createRequestObject())
     })
-    
-    .then(response => response.text())
-    .then(data => {
-        setResponseData(data);
-        console.log(data)
-    })
+    .then()
     .catch(error => {
         console.log(error);
     });

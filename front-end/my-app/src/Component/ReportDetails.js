@@ -6,7 +6,8 @@ function ReportDetails(props) {
             <p>category: {props.report.category}</p>
             <p>comments: {props.report.comments}</p>
             {/* <p>contacts: {props.imageBase64}</p> */}
-            <p>geoTagging: {props.report.geoTagging}</p>
+            <p>latitude: {props.report.geoTagging.latitude}</p>
+            <p>longitude: {props.report.geoTagging.longitude}</p>
             <p>Date created: {props.report.timestamp}</p>
         </div>
     )

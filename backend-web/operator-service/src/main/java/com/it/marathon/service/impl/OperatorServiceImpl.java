@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +31,7 @@ public class OperatorServiceImpl implements OperatorService {
         List<ReportAssignedEntity> reports = reportAssignedRepository.findByOperatorId(operatorId);
         return reports.stream()
                 .map(entity -> modelMapper.map(entity, ReportAssignedDTO.class))
+                .filter(dto -> !dto.getDone())
                 .collect(Collectors.toList());
     }
 
@@ -38,5 +40,9 @@ public class OperatorServiceImpl implements OperatorService {
         log.info("Saving submitted report with id {}", reportSubmitted.getReportId());
         ReportSubmittedEntity entity = modelMapper.map(reportSubmitted, ReportSubmittedEntity.class);
         reportSubmittedRepository.save(entity);
+        Optional<ReportAssignedEntity> assignedEntity = reportAssignedRepository.findById(entity.get_id());
+        ReportAssignedEntity toUpdateEntity = assignedEntity.get();
+        toUpdateEntity.setDone(true);
+        reportAssignedRepository.save(toUpdateEntity);
     }
 }

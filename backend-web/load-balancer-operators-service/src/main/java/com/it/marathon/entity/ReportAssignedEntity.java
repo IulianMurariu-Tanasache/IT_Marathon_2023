@@ -2,6 +2,7 @@ package com.it.marathon.entity;
 
 import com.it.marathon.dto.Categories;
 import com.it.marathon.dto.Contact;
+import com.it.marathon.dto.GeoTag;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +18,7 @@ public class ReportAssignedEntity {
     private Categories category;
     private String comments;
     private Contact contacts;
-    private String geoTagging;
+    private GeoTag geoTagging;
     private String timestamp;
+    private Boolean done = false;
 }

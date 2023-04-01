@@ -1,9 +1,13 @@
 import ReportDetails from './ReportDetails';
+import {useNavigate} from 'react-router-dom'
 
 function ReportsList({ reports }) {
 
+    let Navigates = useNavigate();
+
     const handleSubmit = (report) => {
         console.log('we do this report ' + report.reportId);
+        Navigates("/issue", {state : report})
     }
 
   console.log(reports);

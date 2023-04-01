@@ -13,6 +13,6 @@ public class ReportDTO {
     private Categories category;
     private String comments;
     private Contact contacts;
-    private String geoTagging;
+    private GeoTag geoTagging;
     private String timestamp;
 }
