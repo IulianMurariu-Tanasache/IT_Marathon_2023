@@ -3,6 +3,7 @@ version: "3.7"
 services:
   it-marathon-mongo:
     image: mongo:latest
+    container_name: "it-marathon-mongo"
     #restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -15,6 +16,7 @@ services:
       - ./mongo_volume:/data/db
 
   it-marathon-mysql:
+    container_name: "it-marathon-mysql"
     image: mysql:latest
     #restart: always
     environment:
@@ -25,5 +27,53 @@ services:
       - "3306"
     volumes:
       - ./mysql_volume:/var/lib/mysql
-      - ./scripts/:/docker-entrypoint-initdb.d/ # nu merge aparent....
+      - ./scripts/:/docker-entrypoint-initdb.d/
+
+  it-marathon-ai-service:
+    image: ai-service:1.0-SNAPSHOT
+    container_name: "it-marathon-ai-service"
+    environment:
+      LOAD_BALANCE_HOST: 'it-marathon-load-balancer-service'
+    depends_on:
+      - it-marathon-load-balancer-service
+    ports:
+      - "8001:8001"
+    expose:
+      - "8001"
+
+  it-marathon-load-balancer-service:
+    image: load-balancer-operators-service:1.0-SNAPSHOT
+    container_name: "it-marathon-load-balancer-service"
+    environment:
+      MONGO_HOST: 'it-marathon-mongo'
+      USER_SERVICE_HOST: 'it-marathon-user-service'
+    expose:
+      - "8002"
+    depends_on:
+      - it-marathon-mongo
+      - it-marathon-user-service
+
+  it-marathon-user-service:
+    image: login-service:1.0-SNAPSHOT
+    container_name: 'it-marathon-user-service'
+    environment:
+      MYSQL_HOST: 'it-marathon-mysql'
+    ports:
+      - "8004:8004"
+    expose:
+      - "8004"
+    depends_on:
+      - it-marathon-mysql
+
+  it-marathon-operator-service:
+    image: operator-service:1.0-SNAPSHOT
+    container_name: 'it-marathon-operator-service'
+    environment:
+      MONGO_HOST: 'it-marathon-mongo'
+    ports:
+      - "8003:8003"
+    expose:
+      - "8003"
+    depends_on:
+      - it-marathon-mongo
 
