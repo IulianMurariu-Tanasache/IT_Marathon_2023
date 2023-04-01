@@ -84,7 +84,9 @@ function ResolveIssue() {
       </div>
       <div className='right_panel'>
         <h3 className='raport'>
-        <ReportDetails report={location.state} />
+        <div className='final'>
+            <ReportDetails  report={location.state} />
+        </div>
         </h3>
       </div >
       <div className='pad'>

@@ -148,18 +148,10 @@
   color: rgb(70, 196, 59);
 
 }
-
-.scrollDiv {
-  overflow-y: auto; 
-  width: auto;
-  height: 85%;
-}
 .raportul{
   border-color: black;
   border-style: solid;
   margin-bottom: 15px;
-  padding-bottom: 10px;
-  
 }
 .raportul2{
   border-color: black;
@@ -171,4 +163,16 @@
   border-radius: 25px;
   border: 2px solid #33411f;
   padding: 10px;
+  margin-top: -15px;
+  padding-top: 10px;
+}
+.final2{
+  border-bottom: solid;
+}
+.final{
+  border: solid;
+}
+
+.span-indent {
+  padding-left: 15px;
 }
