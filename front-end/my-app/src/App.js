@@ -12,7 +12,8 @@ function App() {
   return (
 
     <div className="form-wrapper">
-      <p><img src={logo} className="App-logo" alt="logo" /></p>
+      <h1 className='Comm' >Community</h1>
+      <h2 className='Clean'> Clean</h2>
       <Router>
       <Routes>
         <Route path='/' element={<LoginForm/>} />
