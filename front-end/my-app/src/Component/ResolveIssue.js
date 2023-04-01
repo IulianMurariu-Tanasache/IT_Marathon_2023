@@ -80,16 +80,17 @@ function ResolveIssue() {
         <p><textarea className='actions' onChange={event => setDataInput(event.target.value)} />
         <input className = "corner2" type="submit" value="Submit" /></p>
         </form>
-        
+        <div>
+          <button  className='corner'  onClick={handleLogout}>Logout</button>
+        </div>
       </div>
       <div className='right_panel'>
+        <div className='raportul'>
         <h3 className='raport'>
         <ReportDetails report={location.state} />
         </h3>
+        </div>
       </div >
-      <div className='pad'>
-      <button  className='corner'  onClick={handleLogout}>Logout</button>
-      </div>
       
     </div>
     

@@ -12,7 +12,7 @@ function ReportsList({ reports }) {
 
   console.log(reports);
   return(
-      <div className='scrollDiv'>
+      <div>
         <ul>
           {reports.map((report) => (
             <div className='raportul'>

@@ -3,7 +3,7 @@ function ReportDetails(props) {
         <div>
             <h3>Report {props.report._id}</h3>
             {/* <p>image: {props.report.imageBase64}</p> */}
-            <img id="ItemPreview" src={"data:image/jpeg;base64," + props.report.imageBase64}  width="355" height="200"></img>
+            <img id="ItemPreview" src={"data:image/jpeg;base64," + props.report.imageBase64}  width="300" height="225"></img>
             <p>category: {props.report.category}</p>
             <p>comments: {props.report.comments}</p>
             {/* <p>contacts: {props.imageBase64}</p> */}

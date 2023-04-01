@@ -6,6 +6,7 @@ import com.it.marathon.entity.ReportAssignedEntity;
 import com.it.marathon.entity.ReportSubmittedEntity;
 import com.it.marathon.repository.ReportAssignedRepository;
 import com.it.marathon.repository.ReportSubmittedRepository;
+import com.it.marathon.service.EmailAlerter;
 import com.it.marathon.service.OperatorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class OperatorServiceImpl implements OperatorService {
 
+    private final EmailAlerter emailAlerter;
     private final ModelMapper modelMapper;
     private final ReportAssignedRepository reportAssignedRepository;
     private final ReportSubmittedRepository reportSubmittedRepository;
@@ -44,5 +46,6 @@ public class OperatorServiceImpl implements OperatorService {
         ReportAssignedEntity toUpdateEntity = assignedEntity.get();
         toUpdateEntity.setDone(true);
         reportAssignedRepository.save(toUpdateEntity);
+        emailAlerter.sendEmailAlert(toUpdateEntity, entity);
     }
 }
