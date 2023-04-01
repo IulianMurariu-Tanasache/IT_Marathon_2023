@@ -64,7 +64,7 @@ class PhotoFragment : Fragment() {
 
             imageCapture = ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                .setTargetRotation(view?.display?.rotation!!)
+                .setTargetRotation(view?.display?.rotation!!) // todo: fix rotation
                 .build()
 
             val cameraSelector = CameraSelector.Builder()
@@ -99,7 +99,7 @@ class PhotoFragment : Fragment() {
 
     private fun encodeImage(bm: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        bm.compress(Bitmap.CompressFormat.JPEG, 50, baos)
         val b = baos.toByteArray()
         return Base64.encodeToString(b, Base64.DEFAULT)
     }

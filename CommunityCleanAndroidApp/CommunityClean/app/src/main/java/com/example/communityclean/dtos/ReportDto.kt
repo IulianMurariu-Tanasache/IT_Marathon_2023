@@ -1,5 +1,8 @@
 package com.example.communityclean.dtos
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ReportDto(
     val imageBase64: String,
     val category: Int,
@@ -9,6 +12,7 @@ data class ReportDto(
     val timestamp: String
 )
 
+@Serializable
 data class Contacts(
     val email: String,
     val tel: String,
@@ -16,6 +20,7 @@ data class Contacts(
     val lastName: String
 )
 
+@Serializable
 data class GeoTag(
     val latitude: Double,
     val longitude: Double

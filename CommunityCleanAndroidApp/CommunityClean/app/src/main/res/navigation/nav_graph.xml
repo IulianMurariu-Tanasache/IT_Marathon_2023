@@ -46,5 +46,7 @@
         <action
             android:id="@+id/action_submitFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
+        <argument android:name="report_object"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.communityclean.databinding.FragmentFormBinding
 import com.example.communityclean.dtos.Contacts
@@ -23,9 +24,17 @@ import com.example.communityclean.dtos.ReportDto
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.material.snackbar.Snackbar
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlinx.coroutines.*
 
 
 class FormFragment : Fragment() {
@@ -41,6 +50,8 @@ class FormFragment : Fragment() {
     private lateinit var base64Image: String
 
     private val categoryList = listOf("dangerous", "lost", "garbage", "other")
+
+    private val httpClient: HttpClient = HttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,11 +86,10 @@ class FormFragment : Fragment() {
         binding.checkBox.setOnClickListener{
             if(binding.checkBox.isChecked) {
                 setStatusContactFormFields(false)
-                binding.editTextEmail.error = ""
-                binding.editTextPhone.error = ""
-                binding.editTextFirstName.error = ""
-                binding.editTextLastName.error = ""
-
+                binding.editTextEmail.error = null
+                binding.editTextPhone.error = null
+                binding.editTextFirstName.error = null
+                binding.editTextLastName.error = null
             }
             else {
                 setStatusContactFormFields(true)
@@ -122,7 +132,7 @@ class FormFragment : Fragment() {
                 val category = binding.spinner.selectedItemPosition
                 val comments = binding.editTextComments.text.toString()
 
-                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss.SSS")
+                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss.SSS")
                 val currentTimestamp = LocalDateTime.now().format(formatter)
 
                 val reportDto = ReportDto(
@@ -133,17 +143,37 @@ class FormFragment : Fragment() {
 
                 Log.d("CAM", reportDto.toString())
 
+                val jsonString = Json.encodeToString(reportDto)
 
+                val lightweightReportDto = ReportDto("image64", reportDto.category,
+                    reportDto.comments, reportDto.contacts, reportDto.geoTagging, reportDto.timestamp)
 
-                // todo: send http request with form data
+                val lightweightCopyJsonString = Json.encodeToString(lightweightReportDto)
+
+                val status = makePostRequest(jsonString)
+                if (status) {
+                    val nextAction = FormFragmentDirections.actionFormFragmentToSubmitFragment(lightweightCopyJsonString)
+                    findNavController().navigate(nextAction)
+                }
+                else {
+                    Snackbar.make(this.requireView(), "Could not send report to server!", Snackbar.LENGTH_LONG).show()
+                }
             }
             .addOnFailureListener {
                 Log.e("CAM", "nu avem locatie")
-                // todo: show error message
+                Snackbar.make(this.requireView(), "Could not resolve current location!", Snackbar.LENGTH_LONG).show()
             }
     }
 
+    private fun makePostRequest(body: String): Boolean {
+        return runBlocking {
+            val response: HttpResponse = httpClient.post("http://192.168.185.19:8080/post") {
+                this.body = body
+            }
 
+            return@runBlocking response.status == HttpStatusCode.OK
+        }
+    }
 
     private fun validateFormFields(): Boolean {
         var hasErrors = false
