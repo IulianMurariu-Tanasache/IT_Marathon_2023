@@ -11,4 +11,15 @@
     <string name="home_fragment_subtitle">We strive for a better world</string>
     <string name="home_fragment_report_button">Report Object</string>
 
+    <string name="photo_fragment_take_photo_button">Take Photo</string>
+    <string name="form_fragment_comments">Comments...</string>
+    <string name="form_fragment_last_name">Last Name...</string>
+    <string name="form_fragment_first_name">First Name...</string>
+    <string name="form_fragment_email">Email...</string>
+    <string name="form_fragment_phone_number">Phone number...</string>
+    <string name="form_fragment_submit">Submit</string>
+    <string name="form_fragment_category">Category:</string>
+
+    <string name="form_fragment_error_info">Field Required!</string>
+
 </resources>

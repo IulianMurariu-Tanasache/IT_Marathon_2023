@@ -14,13 +14,13 @@ import com.example.communityclean.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-     binding = ActivityMainBinding.inflate(layoutInflater)
-     setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
@@ -35,7 +35,8 @@ private lateinit var binding: ActivityMainBinding
                     .setAction("Action", null).show()
         }
     }
-override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true

@@ -21,7 +21,10 @@
         tools:layout="@layout/fragment_photo">
         <action
             android:id="@+id/action_photoFragment_to_formFragment"
-            app:destination="@id/formFragment" />
+            app:destination="@id/formFragment" >
+            <argument
+                android:name="object_photo" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/formFragment"
@@ -31,6 +34,9 @@
         <action
             android:id="@+id/action_formFragment_to_submitFragment"
             app:destination="@id/submitFragment" />
+        <argument
+            android:name="object_photo"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/submitFragment"
