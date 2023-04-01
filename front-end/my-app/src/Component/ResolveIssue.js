@@ -52,18 +52,24 @@ function ResolveIssue() {
   return (
     <div>
       <div className='left_panel'>
+        <h3 className='acti'>
+           Actions insert by operator:
+        </h3>
         <form onSubmit={handleSubmit}>
         <p><textarea className='actions' onChange={event => setDataInput(event.target.value)} />
-        <input type="submit" value="Trimite" /></p>
+        <input className = "corner2"type="submit" value="Trimite" /></p>
         </form>
         
       </div>
       <div className='right_panel'>
-      <h3>
-        Report
-      </h3>
+        <h3 className='raport'>
+          Report
+        </h3>
       </div >
-      <p className='form-wrapper3'><button  onClick={handleLogout}>Logout</button></p>
+      <div className='pad'>
+      <button className='corner'  onClick={handleLogout}>Logout</button>
+      </div>
+      
     </div>
     
   );
