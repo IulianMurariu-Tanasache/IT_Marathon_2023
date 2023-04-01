@@ -170,9 +170,9 @@ class FormFragment : Fragment() {
     private fun makePostRequest(body: String): Boolean {
         return runBlocking {
             try {
-                val response: HttpResponse = httpClient.post("http://192.168.185.56:8001/api/ai/filter") {
+                val response: HttpResponse = httpClient.post(getString(R.string.report_service_url)) {
                     this.body = body
-                    this.headers.set("Content-Type", "application/json")
+                    this.headers["Content-Type"] = "application/json"
                 }
 
                 return@runBlocking response.status == HttpStatusCode.OK

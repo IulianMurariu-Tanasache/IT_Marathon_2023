@@ -22,4 +22,7 @@
 
     <string name="form_fragment_error_info">Field Required!</string>
 
+
+    <string name="report_service_url">http://192.168.185.56:8001/api/ai/filter</string>
+
 </resources>
