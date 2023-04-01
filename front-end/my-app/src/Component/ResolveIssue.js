@@ -61,6 +61,7 @@ function ResolveIssue() {
     .catch(error => {
         console.log(error);
     });
+    Navigates('/home')
 
   }
   const handleLogout = () => {
@@ -77,7 +78,7 @@ function ResolveIssue() {
         </h3>
         <form onSubmit={handleSubmit}>
         <p><textarea className='actions' onChange={event => setDataInput(event.target.value)} />
-        <input className = "corner2"type="submit" value="Trimite" /></p>
+        <input className = "corner2" type="submit" value="Submit" /></p>
         </form>
         
       </div>
@@ -87,7 +88,7 @@ function ResolveIssue() {
         </h3>
       </div >
       <div className='pad'>
-      <button className='corner'  onClick={handleLogout}>Logout</button>
+      <button  className='corner'  onClick={handleLogout}>Logout</button>
       </div>
       
     </div>

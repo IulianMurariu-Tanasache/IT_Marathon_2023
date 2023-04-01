@@ -48,10 +48,10 @@ function Home() {
       <ReportsList reports={data_json} />
       
 
-      <button onClick={handleSubmit}>Send Req</button>
+      <button className='corner' onClick={handleSubmit}>Get raport list</button>
 
       
-      <p><button onClick={handleLogout}>Logout</button></p>
+      <p><button className='corner'onClick={handleLogout}>Logout</button></p>
       
     </div>
   );
