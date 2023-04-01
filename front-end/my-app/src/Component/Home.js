@@ -1,56 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom'
+import ReportsList from './ReportsList';
 
 
 function Home() {
 
-  var [data_json, setDate] = useState({
-    "reportId" : "",
-    "imageBase64": "",
-    "category": "",
-    "comments": ".",
-    "contacts": {
-        "email": "",
-        "tel": "",
-        "firstName": "",
-        "lastName": ""
-    },
-    "geoTagging": "",
-    "timestamp": ""
-});
-
-//datele de la server
-    const new_jsonData = [
-    {
-        "reportId" : "id_string",
-        "imageBase64": "Base64String==",
-        "category": "lost",
-        "comments": "None.",
-        "contacts": {
-            "email": "ion@mail.com",
-            "tel": "07",
-            "firstName": "Ion",
-            "lastName": "Ionescu"
-        },
-        "geoTagging": "lat,long",
-        "timestamp": "01-04-2023T00:00:00.000"
-    },
-    {
-        "reportId" : "id",
-        "imageBase64": "Base64String==",
-        "category": "lost",
-        "comments": "None.",
-        "contacts": {
-            "email": "ion@mail.com",
-            "tel": "07",
-            "firstName": "Ion",
-            "lastName": "Ionescu"
-        },
-        "geoTagging": "lat,long",
-        "timestamp": "01-04-2023T00:00:00.000"
-    }
-]
+  var [data_json, setResponseData] = useState([]);
 
   let Navigates = useNavigate()
 
@@ -60,67 +16,42 @@ function Home() {
     
 }, [data_json]);
 
-  const handleSubmit = (event) =>{
-    event.preventDefault();
+
+  const handleSubmit = () => {
+    var id_operator = Cookies.get('loginResult')
+
+    fetch("http://localhost:8003/api/operators/reports/" + id_operator,{
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json", 
+        }  
+    })
+    .then(response => response.text())
+    .then(data => {
+      setResponseData(JSON.parse(data));
+      console.log(data)
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     var id_operator = Cookies.get('loginResult')
 
-//     fetch("http://localhost:8080/",{
-//         method: "GET",
-//         headers: {
-//         "Content-Type": "application/json", 
-//         },
-//         params:{
-//             id_operator
-//         }    
-//     })
-    
-//     .then(response => response.text())
-//     .then(data => {
-//       setResponseData(data);
-//       console.log(data)
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-   
-
-//   }
   const handleLogout = () => {
     console.log(Cookies.remove('loginResult'));
     Cookies.remove('loginResult');
     Navigates('/')
   }
-
-  const handleData = () => {
-    console.log("callUpdate")
-    setDate(new_jsonData[0])//iarasi de i prin lista de date
-    
-  }
-  const solveIssue = () =>{
-    //Cookies.set('loginResult', id_operator);
-  }
    
   return (
     <div>
-        {new_jsonData.map((
-            json
-        ) => {
-          return (
-            <pre>{JSON.stringify(json, null, 2)}</pre>
-          );
-        })}
+      <ReportsList reports={data_json} />
       
-    <form onSubmit={handleSubmit}>
 
-    <p><button onClick={handleData}>Send Req</button></p>
+      <button onClick={handleSubmit}>Send Req</button>
 
-    </form>
-    
-    <p><button onClick={handleLogout}>Logout</button></p>
-    
+      
+      <p><button onClick={handleLogout}>Logout</button></p>
+      
     </div>
   );
 }

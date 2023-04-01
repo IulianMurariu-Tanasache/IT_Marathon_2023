@@ -15,7 +15,7 @@ function Login() {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch('http://localhost:8080/login', {///modificat link
+      fetch('http://localhost:8004/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -28,9 +28,6 @@ function Login() {
     .then(responseText => {
     
       var responseLogin = JSON.parse(responseText)
-      //de vazut cum primesc raspunsul
-      //console.log(token["soap11env:Envelope"]["soap11env:Body"]["tns:loginResponse"]["tns:loginResult"])
-    //   var loginResult = token["soap11env:Envelope"]["soap11env:Body"]["tns:loginResponse"]["tns:loginResult"]
     id_operator = responseLogin['id']
      console.log(responseLogin)
      console.log(id_operator)
