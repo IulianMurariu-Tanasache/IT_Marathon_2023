@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ReportAssignedEntity {
 
     @Id
-    private String reportId;
+    private String _id;
     private Integer operatorId;
     private String imageBase64;
     private Categories category;

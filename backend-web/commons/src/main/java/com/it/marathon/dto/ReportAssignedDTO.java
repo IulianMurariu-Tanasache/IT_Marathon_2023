@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportAssignedDTO {
-    private String reportId;
+    private String _id;
     private String imageBase64;
     private Categories category;
     private String comments;

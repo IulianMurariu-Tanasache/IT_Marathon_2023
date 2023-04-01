@@ -148,3 +148,9 @@
   color: rgb(70, 196, 59);
 
 }
+
+.scrollDiv {
+  overflow-y: auto; 
+  width: auto;
+  height: 85%;
+}

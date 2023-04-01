@@ -40,7 +40,7 @@ public class OperatorServiceImpl implements OperatorService {
         log.info("Saving submitted report with id {}", reportSubmitted.getReportId());
         ReportSubmittedEntity entity = modelMapper.map(reportSubmitted, ReportSubmittedEntity.class);
         reportSubmittedRepository.save(entity);
-        Optional<ReportAssignedEntity> assignedEntity = reportAssignedRepository.findById(entity.get_id());
+        Optional<ReportAssignedEntity> assignedEntity = reportAssignedRepository.findById(entity.getReportId());
         ReportAssignedEntity toUpdateEntity = assignedEntity.get();
         toUpdateEntity.setDone(true);
         reportAssignedRepository.save(toUpdateEntity);

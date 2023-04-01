@@ -2,6 +2,26 @@ import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
+import ReportDetails from './ReportDetails';
+
+function pad(number, length) {
+  var str = '' + number;
+  while (str.length < length) {
+      str = '0' + str;
+  }
+  return str;
+}
+
+Date.prototype.formattedTimestamp = function () {
+  var yyyy = this.getFullYear().toString();
+  var MM = pad(this.getMonth() + 1,2);
+  var dd = pad(this.getDate(), 2);
+  var hh = pad(this.getHours(), 2);
+  var mm = pad(this.getMinutes(), 2)
+  var ss = pad(this.getSeconds(), 2)
+
+  return dd + "-" + MM + '-' + yyyy + 'T' + hh + ':' + mm + ":" + ss;
+};
 
 function ResolveIssue() {
   const [responseData, setResponseData] = useState(null);
@@ -15,9 +35,9 @@ function ResolveIssue() {
   const createRequestObject = () => {
     var id_operator = Cookies.get('loginResult')
     var req_obj = {
-      "reportId": location.state.reportId,
+      "reportId": location.state._id,
       "operatorId": id_operator,
-      "timestamp": "",
+      "timestamp": (new Date).formattedTimestamp(),
       "actions": dataInput
     }
     console.log(req_obj)
@@ -63,7 +83,7 @@ function ResolveIssue() {
       </div>
       <div className='right_panel'>
         <h3 className='raport'>
-          Report
+        <ReportDetails report={location.state} />
         </h3>
       </div >
       <div className='pad'>

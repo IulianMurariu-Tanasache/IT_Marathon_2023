@@ -40,12 +40,14 @@ public class LoadBalancingServiceImpl implements LoadBalancingService {
         // find requests not done of operator
         reportRepository.findAll()
                 .forEach(entity -> {
-                    Integer operatorId = entity.getOperatorId();
-                    Integer requests = 0;
-                    if(operatorReportsMap.containsKey(operatorId) && !entity.getDone()) {
-                        requests = operatorReportsMap.get(operatorId);
+                    if(!entity.getDone()) {
+                        Integer operatorId = entity.getOperatorId();
+                        Integer requests = 0;
+                        if (operatorReportsMap.containsKey(operatorId)) {
+                            requests = operatorReportsMap.get(operatorId);
+                        }
+                        operatorReportsMap.put(entity.getOperatorId(), requests + 1);
                     }
-                    operatorReportsMap.put(entity.getOperatorId(), requests + 1);
                 });
 
         log.info("Status of operators queues: {}", operatorReportsMap);
