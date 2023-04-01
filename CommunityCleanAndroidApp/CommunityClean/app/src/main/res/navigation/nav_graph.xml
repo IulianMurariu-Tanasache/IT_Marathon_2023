@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.communityclean.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.example.communityclean.PhotoFragment"
+        android:label="@string/photo_fragment_label"
+        tools:layout="@layout/fragment_photo">
+        <action
+            android:id="@+id/action_photoFragment_to_formFragment"
+            app:destination="@id/formFragment" >
+            <argument
+                android:name="object_photo" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.example.communityclean.FormFragment"
+        android:label="@string/form_fragment_label"
+        tools:layout="@layout/fragment_form">
+        <action
+            android:id="@+id/action_formFragment_to_submitFragment"
+            app:destination="@id/submitFragment" />
+        <argument
+            android:name="object_photo"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/submitFragment"
+        android:name="com.example.communityclean.SubmitFragment"
+        android:label="@string/submit_fragment_label"
+        tools:layout="@layout/fragment_submit">
+        <action
+            android:id="@+id/action_submitFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+        <argument android:name="report_object"
+            app:argType="string" />
+    </fragment>
+</navigation>
