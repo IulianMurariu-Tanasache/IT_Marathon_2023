@@ -1,0 +1,21 @@
+
+[{
+    "id" : "id_string",
+    "imageBase64": "Base64String==",
+    "category": "lost",
+    "comments": "None.",
+    "contacts": {
+        "email": "ion@mail.com",
+        "tel": "07",
+        "firstName": "Ion",
+        "lastName": "Ionescu"
+    },
+    "geoTagging": "lat,long",
+    "timestamp": "01-04-2023T00:00:00.000"
+},
+{
+    "report_id" : "id_string",
+    "operator_id": "id_operator",
+    "timpestemp_done" : "01-04-2023T00:00:00.000",
+    "action": []
+}]
