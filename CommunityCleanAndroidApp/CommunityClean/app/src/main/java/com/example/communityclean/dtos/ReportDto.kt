@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ReportDto(
     val imageBase64: String,
-    val category: Int,
+    val category: String,
     val comments: String?,
     val contacts: Contacts?,
     val geoTagging: GeoTag,

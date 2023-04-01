@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -35,6 +36,7 @@ import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.*
+import java.net.ConnectException
 
 
 class FormFragment : Fragment() {
@@ -129,7 +131,7 @@ class FormFragment : Fragment() {
             .addOnSuccessListener { location: Location ->
                 Log.d("CAM", location.toString())
 
-                val category = binding.spinner.selectedItemPosition
+                val category = categoryList[binding.spinner.selectedItemPosition]
                 val comments = binding.editTextComments.text.toString()
 
                 val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss.SSS")
@@ -167,11 +169,17 @@ class FormFragment : Fragment() {
 
     private fun makePostRequest(body: String): Boolean {
         return runBlocking {
-            val response: HttpResponse = httpClient.post("http://192.168.185.19:8080/post") {
-                this.body = body
-            }
+            try {
+                val response: HttpResponse = httpClient.post("http://192.168.185.56:8001/api/ai/filter") {
+                    this.body = body
+                    this.headers.set("Content-Type", "application/json")
+                }
 
-            return@runBlocking response.status == HttpStatusCode.OK
+                return@runBlocking response.status == HttpStatusCode.OK
+            }
+            catch (ex: Exception) {
+                return@runBlocking false
+            }
         }
     }
 

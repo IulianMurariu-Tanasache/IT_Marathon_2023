@@ -8,9 +8,12 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Surface
+import android.view.Surface.ROTATION_0
 import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.*
+import androidx.camera.core.AspectRatio.RATIO_4_3
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -64,7 +67,8 @@ class PhotoFragment : Fragment() {
 
             imageCapture = ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                .setTargetRotation(view?.display?.rotation!!) // todo: fix rotation
+                .setTargetRotation(Surface.ROTATION_0) // todo: fix rotation
+                .setTargetAspectRatio(AspectRatio.RATIO_4_3)
                 .build()
 
             val cameraSelector = CameraSelector.Builder()
