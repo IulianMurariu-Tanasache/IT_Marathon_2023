@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabInfo.setOnClickListener { view ->
             Snackbar.make(view,
-                "This should open a fragment with informations about the app.",
-                Snackbar.LENGTH_LONG)
+                "App made for IT Marathon 2023.",
+                Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
         }
     }
