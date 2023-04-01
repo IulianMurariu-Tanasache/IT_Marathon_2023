@@ -13,6 +13,7 @@
         <module>ai-service</module>
         <module>login-service</module>
         <module>operator-service</module>
+        <module>load-balancer-operators-service</module>
     </modules>
 
     <parent>

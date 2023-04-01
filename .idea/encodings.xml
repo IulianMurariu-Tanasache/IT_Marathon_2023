@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/backend-web/ai-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-web/commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-web/load-balancer-operators-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-web/login-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-web/operator-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-web/src/main/java" charset="UTF-8" />
