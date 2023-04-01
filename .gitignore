@@ -77,4 +77,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 **/mongo_volume
+**/mysql_volume
 **/target
