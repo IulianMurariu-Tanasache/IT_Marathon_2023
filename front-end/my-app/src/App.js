@@ -5,6 +5,7 @@ import './App.css';
 import LoginForm from './Component/Login';
 import Home from './Component/Home';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import ResolveIssue from './Component/ResolveIssue';
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LoginForm/>} />
         <Route path='/home' element={<Home/>} /> 
+        <Route path='/issue' element={<ResolveIssue/>} /> 
       </Routes>
     </Router>
     </div>

@@ -78,4 +78,34 @@
   height: 10vh;
   background-color: rgb(133, 133, 211);
 }
+.actions
+{
+  display: flex;
+  flex-direction: column;
+  justify-content:first baseline;
+  align-items:normal;
+  height: 200px;
+  width:900px
+  
+}
+.left_panel{
+  width:50%;
+  float:left;
+  overflow: hidden;
+  height: 100%;
+}
 
+.right_panel{
+  width:50%;
+  float:right;
+  overflow: hidden;
+  height: 100%;
+}
+
+.form-wrapper2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(133, 133, 211);
+}

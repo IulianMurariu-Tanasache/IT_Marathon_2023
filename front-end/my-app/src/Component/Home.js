@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom'
 
 
+
 function Home() {
 
   var [data_json, setDate] = useState({
@@ -97,12 +98,9 @@ function Home() {
   const handleData = () => {
     console.log("callUpdate")
     setDate(new_jsonData[0])//iarasi de i prin lista de date
+
     
   }
-  const solveIssue = () =>{
-    //Cookies.set('loginResult', id_operator);
-  }
-   
   return (
     <div>
         {new_jsonData.map((

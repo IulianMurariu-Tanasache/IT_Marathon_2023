@@ -13,7 +13,7 @@ function ResolveIssue() {
     var token = Cookies.get('loginResult')
 
     fetch("http://localhost:8002/artists",{
-        method: "GET",
+        method: "POST",
         headers: {
         "Content-Type": "application/json", 
         "Authorization" : token ,
@@ -39,16 +39,21 @@ function ResolveIssue() {
    
   return (
     <div>
-    <form onSubmit={handleSubmit}>
-
-      <p><input type="text" name="data" id="data" onChange={event => setDataInput(event.target.value)} />
-      <input type="submit" value="Trimite" /></p>
-      
-    </form>
-    
-    <p><button onClick={handleLogout}>Logout</button></p>
-    
+      <div className='left_panel'>
+        <form onSubmit={handleSubmit}>
+        <p><textarea className='actions' onChange={event => setDataInput(event.target.value)} />
+        <input type="submit" value="Trimite" /></p>
+        </form>
+        
+      </div>
+      <div className='right_panel'>
+      <h3>
+        Report
+      </h3>
+      </div >
+      <p className='form-wrapper3'><button  onClick={handleLogout}>Logout</button></p>
     </div>
+    
   );
 }
 
