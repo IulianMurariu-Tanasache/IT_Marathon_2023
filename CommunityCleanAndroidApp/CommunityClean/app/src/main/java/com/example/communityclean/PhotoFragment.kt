@@ -67,7 +67,7 @@ class PhotoFragment : Fragment() {
 
             imageCapture = ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                .setTargetRotation(Surface.ROTATION_0) // todo: fix rotation
+                .setTargetRotation(Surface.ROTATION_0)
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3)
                 .build()
 
