@@ -176,15 +176,15 @@ class FormFragment : Fragment() {
     private fun makePostRequest(body: String): Boolean {
         return runBlocking {
             try {
-                requireActivity().runOnUiThread {
-                    binding.buttonSubmit.isEnabled = false
-                }
+//                requireActivity().runOnUiThread {
+//                    binding.buttonSubmit.isEnabled = false
+//                }
                 val response: HttpResponse = httpClient.post(getString(R.string.report_service_url)) {
                     this.body = body
                     this.headers["Content-Type"] = "application/json"
-                    this.timeout {
-                        connectTimeoutMillis = 2000
-                    }
+//                    this.timeout {
+//                        connectTimeoutMillis = 2000
+//                    }
                 }
 
                 return@runBlocking response.status == HttpStatusCode.OK
@@ -193,9 +193,9 @@ class FormFragment : Fragment() {
                 return@runBlocking false
             }
             finally {
-                requireActivity().runOnUiThread {
-                    binding.buttonSubmit.isEnabled = true
-                }
+//                requireActivity().runOnUiThread {
+//                    binding.buttonSubmit.isEnabled = true
+//                }
             }
         }
     }
