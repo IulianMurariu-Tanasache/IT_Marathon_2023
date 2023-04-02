@@ -27,6 +27,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.material.snackbar.Snackbar
 import io.ktor.client.*
+import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -92,6 +93,11 @@ class FormFragment : Fragment() {
                 binding.editTextPhone.error = null
                 binding.editTextFirstName.error = null
                 binding.editTextLastName.error = null
+                binding.editTextEmail.text.clear()
+                binding.editTextPhone.text.clear()
+                binding.editTextFirstName.text.clear()
+                binding.editTextLastName.text.clear()
+
             }
             else {
                 setStatusContactFormFields(true)
@@ -170,15 +176,26 @@ class FormFragment : Fragment() {
     private fun makePostRequest(body: String): Boolean {
         return runBlocking {
             try {
+                requireActivity().runOnUiThread {
+                    binding.buttonSubmit.isEnabled = false
+                }
                 val response: HttpResponse = httpClient.post(getString(R.string.report_service_url)) {
                     this.body = body
                     this.headers["Content-Type"] = "application/json"
+                    this.timeout {
+                        connectTimeoutMillis = 2000
+                    }
                 }
 
                 return@runBlocking response.status == HttpStatusCode.OK
             }
             catch (ex: Exception) {
                 return@runBlocking false
+            }
+            finally {
+                requireActivity().runOnUiThread {
+                    binding.buttonSubmit.isEnabled = true
+                }
             }
         }
     }
